@@ -216,3 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# RAG project data (generated locally, not committed)
+data/chroma_db/
+data/uploads/
