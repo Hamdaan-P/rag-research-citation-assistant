@@ -1,0 +1,212 @@
+:root {
+  --accent: #5b7c99;
+  --accent-light: #eaf0f4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.app-header {
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.app-header h1 {
+  margin-top: 0;
+  line-height: 1.15;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+.app-top-row {
+  display: grid;
+  grid-template-columns: 260px 1fr 260px;
+  gap: 24px;
+  align-items: start;
+}
+
+.app-summary-section {
+  width: 100%;
+  margin-top: 32px;
+}
+
+@media (max-width: 900px) {
+  .app-top-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.app-subtitle {
+  color: #6b6375;
+  font-size: 16px;
+  margin: 0;
+}
+
+.section-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.result-card {
+  background: #fff;
+  border: 1px solid #e5e4e7;
+  border-radius: 8px;
+  padding: 24px;
+  margin-top: 24px;
+}
+
+.app-summary-section .result-card {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.result-heading {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.result-summary {
+  line-height: 1.7;
+  max-width: 100%;
+  color: #3f3d45;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.source-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b6375;
+  margin-bottom: 8px;
+}
+
+.source-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  background: #ececea;
+  color: #1a1a1a;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 13px;
+}
+
+.text-input,
+.file-input,
+.textarea-input {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #d8d8d5;
+  font: inherit;
+}
+
+.primary-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.primary-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.papers-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.papers-scroll {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.papers-scroll .paper-item {
+  padding: 8px 0;
+}
+
+.papers-scroll .paper-info span {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.paper-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e4e7;
+}
+
+.paper-item:hover {
+  background: var(--accent-light);
+}
+
+.papers-scroll .paper-item:last-child {
+  border-bottom: none;
+}
+
+.paper-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.paper-info span {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.delete-btn {
+  font-size: 13px;
+  padding: 4px 10px;
+  color: #b91c1c;
+  background: transparent;
+  border: 1px solid #f3b4b4;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete-btn:hover:not(:disabled) {
+  background: #fbdcdc;
+}
+
+.delete-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

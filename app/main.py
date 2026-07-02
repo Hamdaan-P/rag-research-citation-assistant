@@ -1,6 +1,7 @@
 import os
 import shutil
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import chromadb
 
@@ -15,6 +16,13 @@ app = FastAPI(
     title="RAG Research Citation Assistant",
     description="Upload papers, ask questions, get cited Related Work summaries.",
     version="0.1.0"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_methods=["*"],
+    allow_headers=["*"]
 )
 
 
@@ -90,6 +98,12 @@ def query_papers(request: QueryRequest):
 
     try:
         chunks = query_chunks(query_text=request.query, top_k=5)
+
+        for chunk in chunks:
+            paper_title = chunk["metadata"]["paper_title"]
+            chunk_index = chunk["metadata"]["chunk_index"]
+            print(f"[DEBUG] Retrieved: {paper_title} - chunk {chunk_index}")
+
         summary = generate_related_work(query=request.query, chunks=chunks)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to generate summary: {str(e)}")
