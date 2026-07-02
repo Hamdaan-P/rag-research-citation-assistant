@@ -99,6 +99,10 @@ def ingest_pdf(pdf_path: str, paper_title: str):
 
     print(f"Stored {len(chunks)} chunks from '{paper_title}' into ChromaDB.")
 
+    # Return a small summary so callers (like the FastAPI upload route)
+    # can report back to the user what actually happened.
+    return {"paper_title": paper_title, "chunks_stored": len(chunks)}
+
 
 if __name__ == "__main__":
     # A simple list of (file path, human-readable title) pairs.
