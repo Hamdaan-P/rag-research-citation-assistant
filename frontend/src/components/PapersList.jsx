@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-function PapersList({ onExpandedChange } = {}) {
+function PapersList({ onExpandedChange, onRegisterRefresh } = {}) {
   const [papers, setPapers] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -31,6 +31,7 @@ function PapersList({ onExpandedChange } = {}) {
 
   useEffect(() => {
     fetchPapers()
+    onRegisterRefresh(fetchPapers)
   }, [])
 
   const handleDelete = async (title) => {

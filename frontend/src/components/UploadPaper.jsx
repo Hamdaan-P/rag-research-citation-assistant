@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function UploadPaper() {
+function UploadPaper({ onUploaded }) {
   const [file, setFile] = useState(null)
   const [title, setTitle] = useState('')
   const [status, setStatus] = useState('')
@@ -25,6 +25,7 @@ function UploadPaper() {
         setStatus(
           `Uploaded successfully: ${data.paper_title}, ${data.chunks_stored} chunks stored`
         )
+        onUploaded?.()
       } else {
         setStatus(data.detail)
       }

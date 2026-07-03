@@ -17,6 +17,7 @@ function App() {
   const [libraryExpanded, setLibraryExpanded] = useState(false)
   const [queryResult, setQueryResult] = useState(null)
   const [queryError, setQueryError] = useState('')
+  const [refreshLibrary, setRefreshLibrary] = useState(null)
 
   return (
     <div className="app-container">
@@ -29,7 +30,7 @@ function App() {
 
       <div className="app-top-row">
         <div>
-          <PapersList onExpandedChange={setLibraryExpanded} />
+          <PapersList onExpandedChange={setLibraryExpanded} onRegisterRefresh={(fn) => setRefreshLibrary(() => fn)} />
         </div>
         <div>
           <h4 className="section-label">Search your library</h4>
@@ -37,7 +38,7 @@ function App() {
         </div>
         <div>
           <h4 className="section-label">Add a paper</h4>
-          <UploadPaper />
+          <UploadPaper onUploaded={refreshLibrary} />
         </div>
       </div>
 
