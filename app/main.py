@@ -1,5 +1,6 @@
 import os
 import shutil
+import uuid
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -70,7 +71,15 @@ async def upload_paper(
         raise HTTPException(status_code=400, detail="Only PDF files are supported.")
 
     os.makedirs("data/uploads", exist_ok=True)
-    save_path = os.path.join("data/uploads", file.filename)
+
+    # Never trust file.filename directly: FastAPI/Starlette does not sanitize
+    # it, so a crafted name containing "../" could write outside
+    # data/uploads (path traversal), and two unrelated uploads sharing the
+    # same client-supplied filename would collide on the same on-disk path
+    # and on the ChromaDB chunk IDs derived from it. A random UUID name
+    # sidesteps both problems.
+    safe_filename = f"{uuid.uuid4().hex}.pdf"
+    save_path = os.path.join("data/uploads", safe_filename)
 
     with open(save_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
