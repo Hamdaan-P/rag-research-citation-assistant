@@ -1,13 +1,10 @@
 # app/retrieve.py
 
 import chromadb
-from sentence_transformers import SentenceTransformer
+
+from app.embedder import embedding_model
 
 # --- Setup: connect to the SAME model and SAME database ingest.py used ---
-# Loading this model takes a couple seconds, so we do it once at import time,
-# not inside the function (otherwise every query would reload it - slow).
-embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
-
 # PersistentClient means "read from disk", not "start fresh in memory".
 # This MUST be the same path as ingest.py, or we'll be looking at an empty cabinet.
 chroma_client = chromadb.PersistentClient(path="data/chroma_db")

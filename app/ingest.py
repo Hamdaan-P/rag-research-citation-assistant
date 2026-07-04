@@ -15,11 +15,9 @@ Each chunk is stored along with:
 import os
 import fitz  # PyMuPDF
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from sentence_transformers import SentenceTransformer
 import chromadb
 
-# Load the embedding model once, at import time.
-embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+from app.embedder import embedding_model
 
 # Create a persistent ChromaDB client.
 # "persistent" means it writes to disk at this path — NOT just kept in memory.
