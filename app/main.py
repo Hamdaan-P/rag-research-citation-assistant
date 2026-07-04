@@ -39,7 +39,7 @@ def health_check():
 
 @app.get("/papers")
 def list_papers():
-    results = collection.get()
+    results = collection.get(include=["metadatas"])
     metadatas = results["metadatas"]
 
     if not metadatas:
