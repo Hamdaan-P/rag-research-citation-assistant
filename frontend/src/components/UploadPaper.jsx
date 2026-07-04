@@ -29,6 +29,8 @@ function UploadPaper({ onUploaded }) {
       } else {
         setStatus(data.detail)
       }
+    } catch (err) {
+      setStatus('Could not reach the server. Please check your connection and try again.')
     } finally {
       setLoading(false)
     }

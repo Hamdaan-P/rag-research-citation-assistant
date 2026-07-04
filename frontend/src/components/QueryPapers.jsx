@@ -25,6 +25,9 @@ function QueryPapers({ onResult, onError }) {
         onError(data.detail)
         onResult(null)
       }
+    } catch (err) {
+      onError('Could not reach the server. Please check your connection and try again.')
+      onResult(null)
     } finally {
       setLoading(false)
     }
