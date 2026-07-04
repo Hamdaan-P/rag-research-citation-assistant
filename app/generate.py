@@ -4,6 +4,8 @@ import os
 from dotenv import load_dotenv
 import google.generativeai as genai
 
+from app.config import RELEVANCE_THRESHOLD
+
 # Load API key from .env, same pattern as our test script
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
@@ -39,8 +41,6 @@ def generate_related_work(query: str, chunks: list) -> str:
     # Step 0: relevance check — if even the BEST match is too "far" in
     # meaning-space, the library likely has nothing genuinely relevant.
     # Distance is a measure of semantic closeness: smaller = more similar.
-    RELEVANCE_THRESHOLD = 1.0  # tuned based on real test queries
-
     if not chunks or chunks[0]["distance"] > RELEVANCE_THRESHOLD:
         return ("No sufficiently relevant papers were found in your library "
                 "for this topic. Try rephrasing your query, or upload papers "

@@ -9,6 +9,7 @@ import chromadb
 from app.ingest import ingest_pdf
 from app.retrieve import query_chunks
 from app.generate import generate_related_work
+from app.config import RELEVANCE_THRESHOLD
 
 chroma_client = chromadb.PersistentClient(path="data/chroma_db")
 collection = chroma_client.get_or_create_collection(name="research_papers")
@@ -118,7 +119,7 @@ def query_papers(request: QueryRequest):
         raise HTTPException(status_code=500, detail=f"Failed to generate summary: {str(e)}")
 
     source_papers = []
-    if chunks and chunks[0]["distance"] <= 1.0:
+    if chunks and chunks[0]["distance"] <= RELEVANCE_THRESHOLD:
         seen = set()
         for chunk in chunks:
             title = chunk["metadata"]["paper_title"]
